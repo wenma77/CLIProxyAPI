@@ -321,7 +321,7 @@ func (s *Server) setupRoutes() {
 		c.JSON(http.StatusOK, gin.H{"status": "ok"})
 	})
 
-	s.engine.GET("/management.html", s.serveManagementControlPanel)
+	s.engine.HEAD("/healthz", func(c *gin.Context) { 		c.Status(http.StatusOK) 	})  	s.engine.GET("/management.html", s.serveManagementControlPanel)
 	openaiHandlers := openai.NewOpenAIAPIHandler(s.handlers)
 	geminiHandlers := gemini.NewGeminiAPIHandler(s.handlers)
 	geminiCLIHandlers := gemini.NewGeminiCLIAPIHandler(s.handlers)
